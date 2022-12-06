@@ -18,7 +18,9 @@ function shade(x, y, t) {
     //❓❓ Question 2
     //❓❓ Question 3
     //❓❓ Question 4
-    return [x,y,Math.sin(t)];
+    //fliping color of the background with the sun 
+    return [1, 1, Math.sin(t) + 1.5]
+
 }
 
 /**
@@ -28,11 +30,48 @@ function shade(x, y, t) {
  */
 function draw(ctx, t) {
     //See https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = 'black';
-    //❓❓ Question 5
-    //❓❓ Question 6
-    ctx.strokeRect(75, 100, 150 + 10 * Math.sin(t), 100 + 10 * Math.cos(t)); 
+    //creates cloud's shape and color 
+    ctx.beginPath();
+    ctx.arc(50, 50, 30, 0, 2 * Math.PI);
+    ctx.arc(80, 45, 20, 0, 2 * Math.PI);
+    ctx.arc(20, 60, 20, 0, 2 * Math.PI);
+    ctx.fillStyle = 'grey';
+    ctx.fill();
+
+//width of house
+ctx.lineWidth = 5;
+
+// Walls of house
+ctx.strokeRect(76, 160, 100, 90);
+
+
+// Door of the house and color
+ctx.fillRect(100, 187, 52, 60);
+ctx.fillStyle = 'grey';
+ctx.fill();
+
+// Roof of the house and color
+ctx.beginPath();
+ctx.moveTo(55, 160);
+ctx.lineTo(130, 90);
+ctx.lineTo(200, 160);
+ctx.closePath();
+ctx.stroke();
+ctx.fillStyle = 'grey'
+ctx.fill();
+
+//sun shape, color, and animation
+ctx.beginPath();
+ctx.lineWidth = 2;
+ctx.arc(225, 30, 30, 0, 10 * Math.sin(t));
+ctx.arc(225, 30, 30, 0, 2 * Math.PI, 20 + 10 * Math.cos(t));
+ctx.stroke();
+ctx.fillStyle = 'yellow';
+ctx.fill();
+
+ 
 }
 
-export default { name: "My Homework", shade, draw }
+
+export default { name: "Sunny day flip", shade, draw }
+
